@@ -1,0 +1,95 @@
+\newcommand{\docente}{Prof. Camila Di Ielsi}
+\input{../../init}
+\usepackage{enumitem}
+\begin{document}
+\caratulaClase{Clase de repaso}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]\frametitle{Recordando la clase pasada...}
+
+Ten\'iamos el m\'etodo \vrd{\tt listar\_por\_dificultad} de la clase CatalogoPociones que devolv\'ia una lista que guardaba las pociones cuya dificultad coincid\'ia con el argumento con el cual el m\'etodo es invocado.\bigskip
+
+Agreguemos un nuevo m\'etodo que toma una dificultad y alguna caracter\'isitica (como puede ser un color o textura) tal que me devuelva una lista de las pociones que sean de esa dificultad y que contengan esa caracter\'istica.
+
+
+	
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Ejercicio 1, a}
+
+Quedar\'ia algo as\'i:
+\begin{lstlisting}[style=python,numbers=none,basicstyle=\ttfamily\tiny]
+def tienen_caracteristica(self, dif:str, caracteristica:str)-> List[Pocion]:
+
+    pociones_con_caracterisitica:List[Pocion] = []
+    
+    pociones_dificultad: List[Pocion]= self.pociones_dificultad[dif]
+    
+    for pocion in pociones_dificultad :
+        if caracteristica in pocion.caracteristicas:
+            pociones_con_caracterisitica.append(pocion)
+
+    return pociones_con_caracterisitica
+	
+\end{lstlisting}
+
+Veamos que su complejidad es de a lo sumo O(n)!
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Ejercicio 1, b}
+	
+	Siendo: 
+	\begin{itemize}
+		\item \textbf{n} la cantidad de pociones
+		\item \textbf{d} la cantidad de niveles de dificultad
+		\item \textbf{pd} la cantidad de pociones de una cierta dificultad
+	\end{itemize}
+	 
+	\begin{lstlisting}[style=python,numbers=none,basicstyle=\ttfamily\tiny]
+def tienen_caracteristica(self, dif:str, caracteristica:str)-> List[Pocion]:
+
+    pociones_con_caracteristica:List[Pocion] = [] # O(1)
+
+    pociones_dificultad: List[Pocion]= self.pociones_dificultad[dif] # O(d)
+
+    for pocion in pociones_dificultad : # n iteraciones
+         if caracteristica in pocion.caracteristicas: # O(1)
+             pociones_con_caracteristica.append(pocion) # O(1)
+
+    return pociones_con_caracteristica # O(1)
+
+	\end{lstlisting}
+	
+Tambi\'en est\'a bien razonar y proponer que el tama\~no del string de Characteristics est\'a acotada
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Ejercicio 2}
+
+Agreguemos nuevos m\'etodos que nos devuelvan m\'as informaci\'on sobre la clase CatalogoPociones.\bigskip
+
+\az{(a)} \vrd{\tt cantidad(dificultad:str)->int} debe devolver la cantidad de pociones que tienen la dificultad indicada por el argumento con el cual el m\'etodo es invocado.\medskip
+
+\az{(b)} \vrd{\tt ingredientes(dificultad:str)->Set[str]} debe devolver el conjunto de todos los ingredientes que se usan para preparar las pociones que tienen la dificultad indicada por el argumento con el cual el m\'etodo es invocado.\bigskip
+
+ ?`Qu\'e complejidad tienen estos nuevos m\'etodos?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

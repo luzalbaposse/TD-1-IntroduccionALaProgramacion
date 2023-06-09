@@ -1,0 +1,71 @@
+\newcommand{\docente}{Prof. Camila Di Ielsi}
+
+\input{../init}
+
+\usepackage{enumitem}
+\usepackage{pifont}
+\begin{document}
+
+\caratulaClase{Clase pr\'actica 13: M\'as Clases}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\frametitle{Introducci\'on}
+En la p\'agina {\scriptsize\color{blue}{\url{https://www.kaggle.com/gulsahdemiryurek/harry-potter-dataset}}} hay distintos {\it datasets} disponibles con datos relativos al universo de Harry Potter sobre personajes, pociones y hechizos, entre otras cosas. \bigskip
+
+Durante la clase de hoy ejercitaremos la manipulaci\'on de datos usando los archivos {\tt Potions.csv} y {\tt Potions-mini.csv}, que cuentan con informaci\'on sobre las distintas pociones que aparecen en la saga. \bigskip
+
+De cada poci\'on {\tt p} se tiene:
+
+\begin{itemize}
+\item [$\bullet$] el nombre;
+\item [$\bullet$] la lista de los ingredientes conocidos;
+\item [$\bullet$] el efecto que produce;
+\item [$\bullet$] sus caracter\'isticas; y
+\item [$\bullet$] el nivel de dificultad de su preparaci\'on.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]\frametitle{\amarillo{Ejercicio 1}}
+Descargar el archivo {\tt pocion.py} de la p\'agina de la materia y completar la clase \rj{\tt Pocion} para que:\medskip
+
+\az{(a)} la representaci\'on como {\tt str} de una poci\'on {\tt p} sea el nombre de {\tt p};\medskip
+
+\az{(b)} dos pociones {\tt p1} y {\tt p2} puedan compararse por menor de forma tal que {\tt p1 < p2} sea \vrd{verdadero} si el nombre de {\tt p1} es menor al de {\tt p2} de acuerdo al orden lexicogr\'afico.\bigskip
+
+A continuaci\'on puede observarse un ejemplo junto a los resultados esperados:
+
+\begin{lstlisting}[style=python,numbers=none]
+p1:Pocion = Pocion('pocion 1', ['a','b'], 'e1', 'c1', 'd1')
+p2:Pocion = Pocion('pocion 2', ['c','d'], 'e2', 'c2', 'd2')
+
+print(p1)               # imprime 'pocion 1'
+print(p2)               # imprime 'pocion 2'
+
+print(p1 < p2)          # imprime True
+print(p2 < p1)          # imprime False
+\end{lstlisting}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]\frametitle{\amarillo{Ejercicio 2}}\footnotesize
+Descargar el archivo {\tt catalogo-pociones.py} de la p\'agina de la materia y completar los m\'etodos \vrd{\tt \_\_init\_\_}, \vrd{\tt listar\_por\_dificultad} y  \vrd{\tt listar\_pociones\_con\_n\_ingredientes} de la clase \rj{\tt CatalogoPociones} teniendo en cuenta que:\bigskip
+
+\az{(a)} \rj{\tt CatalogoPociones} debe tener un \'unico atributo de tipo\\
+\vrd{\tt Dict[str, Set[Pocion]]}, que vincula niveles de dificultad de preparaci\'on de pociones con todas las pociones de tal dificultad. \grs{(Las pociones que no tengan definida una dificultad no deben incluirse en el cat\'alogo).}\medskip
+
+\az{(b)} \vrd{\tt listar\_por\_dificultad} debe devolver una lista de las Pociones del catalogo que tienen la dificultad indicada por el argumento con el cual el m\'etodo es invocado. Las pociones deben aparecer ordenadas siguiendo la relaci\'on {\tt <} de la clase \rj{\tt Poci\'on}. ?`Cu\'al es la complejidad de este m\'etodo? \bigskip
+
+\az{(c)} \vrd{\tt listar\_pociones\_con\_n\_ingredientes} debe devolver una lista de tuplas, d\'onde cada tupla guarda la Poci\'on con n cantidad de ingredientes y su dificultad, d\'onde n es el argumento con el cual el m\'etodo es invocado. Las tuplas que conforman la lista deben ser de la froma {\tt < difucultad, Pocion >}.  ?`Cu\'al es la complejidad de este m\'etodo? \bigskip
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\end{document}

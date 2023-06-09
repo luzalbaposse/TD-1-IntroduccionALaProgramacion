@@ -1,0 +1,13 @@
+vr: List[int] = []
+i: int = 0
+# (A)
+while i < len(l):
+  # (B)
+  if i % 2 == 0:
+    vr.append(l[i])
+  else:
+    vr.append(l[i]+n)
+  i = i + 1
+  # (C)
+# (D)
+return vr

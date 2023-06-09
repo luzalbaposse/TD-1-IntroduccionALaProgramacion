@@ -1,0 +1,266 @@
+\newcommand{\docente}{Cristian Nahuel Díaz}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\input{init}
+
+
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  backgroundcolor=\color{white},
+  numbersep=10pt,
+}
+
+
+\begin{document}
+
+
+
+\caratulaClase{Clase pr\'actica 7: M\'as listas, ciclos, invariantes.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Ejercicio 1 - Terminaci\'on}
+\begin{columns}
+\begin{column}{0.35\textwidth}
+\lstinputlisting[language=Python]{suma-en-posiciones-impares}
+\end{column}
+\begin{column}{0.65\textwidth}
+\begin{itemize}[<+->]
+  \item \textcolor<1>{red}{i comienza valiendo 0}
+  \item \textcolor<2>{red}{La lista $l$ no se modifica o sea que $len(l)$ es fijo}
+  \item \textcolor<3>{red}{En cada iteraci\'on i se incrementa en 1}
+  \item \textcolor<4>{red}{Por lo tanto es inevitable que en alg\'un momento $i = len(l)$, momento en el que la guarda evaluar\'a a False y el ciclo terminar\'a}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Ejercicio 1 - Correctitud}
+\begin{columns}
+\begin{column}{0.35\textwidth}
+\lstinputlisting[language=Python]{suma-en-posiciones-impares}
+\end{column}
+\begin{column}{0.65\textwidth}
+
+%% INVARIANTE
+\fbox{%
+  \parbox{\textwidth}{
+    \I:
+    \begin{itemize}[<+->]
+      \pause
+      \item $0 <= i <= len(l)$
+      \item $len(vr) == i$
+      \item Para j tal que $0 <= j <= i-1$, $vr[j] == l[j]$ si j es par y $vr[j] == l[j]+n$ si j es impar
+    \end{itemize}
+  }%
+}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Ejercicio 1 - Correctitud}
+\begin{columns}
+\begin{column}{0.35\textwidth}
+\lstinputlisting[language=Python]{suma-en-posiciones-impares}
+\end{column}
+\begin{column}{0.65\textwidth}
+
+%% INVARIANTE
+\fbox{%
+  \parbox{\textwidth}{
+    \I:
+    \begin{itemize}
+      \item $0 <= i <= len(l)$
+      \item $len(vr) == i$
+      \item Para j tal que $0 <= j <= i-1$, $vr[j] == l[j]$ si j es par y $vr[j] == l[j]+n$ si j es impar
+    \end{itemize}
+  }%
+}
+\\
+\textcolor{blue}{Vale \I en (A)?}
+\begin{itemize}[<+->]
+  \item $i = 0$ entonces vale $0 <= i <= len(l)$
+  \item $vr = []$ entonces vale $len(vr) == 0 == i$
+  \item Como i = 0, el rango 0 a i-1 es vac\'io, entonces la 3er sentencia del invariante vale autom\'aticamente
+\end{itemize}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Ejercicio 1 - Correctitud}
+\begin{columns}
+\begin{column}{0.35\textwidth}
+\lstinputlisting[language=Python]{suma-en-posiciones-impares}
+\end{column}
+\begin{column}{0.65\textwidth}
+
+%% INVARIANTE
+\fbox{%
+  \parbox{\textwidth}{
+    \I:
+    \begin{itemize}
+      \item $0 <= i <= len(l)$
+      \item $len(vr) == i$
+      \item Para j tal que $0 <= j <= i-1$, $vr[j] == l[j]$ si j es par y $vr[j] == l[j]+n$ si j es impar
+    \end{itemize}
+  }%
+}
+\\
+\textcolor{blue}{Asumamos que \I vale en (B). Sea K el valor de i}
+\pause
+\begin{itemize}
+  \item Tenemos que $0 <= K \textcolor<3>{red}{<} len(l)$
+  \item Vale $len(vr) == K$
+  \item Para j tal que $0 <= j <= K-1$, $vr[j] == l[j]$ si j es par y $vr[j] == l[j]+n$ si j es impar
+\end{itemize}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Ejercicio 1 - Correctitud}
+\begin{columns}
+\begin{column}{0.35\textwidth}
+\lstinputlisting[language=Python]{suma-en-posiciones-impares}
+\end{column}
+\begin{column}{0.65\textwidth}
+
+%% INVARIANTE
+\fbox{%
+  \parbox{\textwidth}{
+    (B):
+    \begin{itemize}
+      \item Tenemos que $0 <= K < len(l)$
+      \item Vale $len(vr) == K$
+      \item Para j tal que $0 <= j <= K-1$, $vr[j] == l[j]$ si j es par y $vr[j] == l[j]+n$ si j es impar
+    \end{itemize}
+  }%
+}
+\\
+\textcolor{blue}{Vale \I en (C)?}
+\begin{itemize}
+  \item Si K es par, se agrega a vr el valor de l[K]. Si es impar, se agrega a vr l[K]+n
+  \item len(vr) se incrementa en 1, entonces vale $len(vr) == K + 1$
+  \item i se incrementa en 1, entonces vale $i == K + 1$ (y que $i-1 == K$)
+\end{itemize}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Ejercicio 1 - Correctitud}
+\begin{columns}
+\begin{column}{0.35\textwidth}
+\lstinputlisting[language=Python]{suma-en-posiciones-impares}
+\end{column}
+\begin{column}{0.65\textwidth}
+
+
+\textcolor{blue}{Vale \I en (C)?}
+\begin{itemize}
+  \item Si K es par, se agrega a vr el valor de l[K]. Si es impar, se agrega a vr l[K]+n
+  \item len(vr) se incrementa en 1, entonces vale $len(vr) == K + 1$
+  \item i se incrementa en 1, entonces vale $i == K + 1$ (y que $i-1 == K$)
+  \item Entonces \textcolor{red}{$len(vr) = i$} \pause
+  \only<2>{\item Para j tal que $\textcolor{red}{0 <= j <= K}$, $vr[j] == l[j]$ si j es par y $vr[j] == l[j]+n$ si j es impar}
+  \item<3-> Para j tal que $\textcolor{red}{0 <= j <= i-1}$, $vr[j] == l[j]$ si j es par y $vr[j] == l[j]+n$ si j es impar
+  \item<4-> $0 <= K < len(l)$ equivale a $0 <= K+1 <= len(l)$ y esto equivale a que $\textcolor{red}{0 <= i <= len(l)}$
+\end{itemize}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Ejercicio 1 - Correctitud}
+\begin{columns}
+\begin{column}{0.35\textwidth}
+\lstinputlisting[language=Python]{suma-en-posiciones-impares}
+\end{column}
+\begin{column}{0.65\textwidth}
+
+%% INVARIANTE
+\fbox{%
+  \parbox{\textwidth}{
+    \I:
+    \begin{itemize}
+      \item $0 <= i <= len(l)$
+      \item $len(vr) == i$
+      \item Para j tal que $0 <= j <= i-1$, $vr[j] == l[j]$ si j es par y $vr[j] == l[j]+n$ si j es impar
+    \end{itemize}
+  }%
+}
+
+\textcolor{green}{Vale \I en (C)!}
+\begin{itemize}
+  \item Entonces \textcolor{red}{$len(vr) = i$}
+  \item Para j tal que $\textcolor{red}{0 <= j <= i-1}$, $vr[j] == l[j]$ si j es par y $vr[j] == l[j]+n$ si j es impar
+  \item $0 <= K < len(l)$ equivale a $0 <= K+1 <= len(l)$ y esto equivale a que $\textcolor{red}{0 <= i <= len(l)}$
+\end{itemize}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Ejercicio 1 - Correctitud}
+\begin{columns}
+\begin{column}{0.35\textwidth}
+\lstinputlisting[language=Python]{suma-en-posiciones-impares}
+\end{column}
+\begin{column}{0.65\textwidth}
+
+%% INVARIANTE
+\fbox{%
+  \parbox{\textwidth}{
+    \I:
+    \begin{itemize}
+      \item $0 <= i <= len(l)$
+      \item $len(vr) == i$
+      \item Para j tal que $0 <= j <= i-1$, $vr[j] == l[j]$ si j es par y $vr[j] == l[j]+n$ si j es impar
+    \end{itemize}
+  }%
+}
+\begin{itemize}[<+->]
+  \item Por \'ultimo, en (D) vale el \I y adem\'as que i == len(l)
+  \item Entonces vale que para j tal que $\textcolor{red}{0 <= j <= len(l)-1}$, $vr[j] == l[j]$ si j es par y $vr[j] == l[j]+n$ si j es impar
+  \item Tambi\'en que $\textcolor{red}{len(vr) == i == len(l)}$
+\end{itemize}
+
+\end{column}
+\end{columns}
+\pause
+\textcolor{blue}{Entonces vale el devuelve: $len(vr)==len(l)$, y en toda posici\'on j entre 0 y len(l)-1:
+          vr[j]==l[j] si j es par, o bien vr[j]==l[j]+n si j es impar}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

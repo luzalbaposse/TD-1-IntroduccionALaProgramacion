@@ -1,0 +1,149 @@
+\newcommand{\docente}{Augusto Gonz\'alez Omahen}
+\input{../init}
+\usepackage{enumitem}
+\begin{document}
+\caratulaClase{Clase de repaso \grs{\it (continuaci\'on)}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\titlepage
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]\frametitle{Ejercicio 1}
+
+Recordando un poco el algoritmo y su invariante de la clase pasada, vamos a demostrar que esa implementaci\'on es correcta respecto de su especificaci\'on.%\medskip
+
+
+%\az{(a)} Funci\'on \vrd{\tt sumar\_digitos}:
+
+\begin{columns} 
+
+	\begin{column}{.68\textwidth}
+\begin{lstlisting}[style=python]
+def sumar_digitos(s:str) -> int:
+  '''
+  Requiere: s solo tiene digitos 
+  Devuelve: la suma de los digitos en s
+  '''
+  res:int = 0
+  i:int = 0
+  #A
+  while i < len(s):
+    #B
+    res = res + int(s[i])
+    i = i + 1
+    #C
+  #D
+  return res
+\end{lstlisting}
+	\end{column}
+
+	\begin{column}{.28\textwidth}
+		
+		\begin{center}
+			\medskip
+			\vrd{\tt Invariante}\\
+			\bigskip
+			0 $\leq$ \textbf{i} $\leq$ len(s) \\
+			\medskip
+			\textbf{res} tiene la suma de los d\'igitos de s hasta la pos \textbf{i} (sin incluir)
+		\end{center}		
+	\end{column}%
+\end{columns}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}\frametitle{Ejercicio 2}\small
+	\vspace*{-1em}
+	En cualquier palabra en espa\~nol, si a continuaci\'on de cada aparici\'on de una vocal se agrega primero una p y luego la misma vocal en min\'uscula, se obtiene la palabra en el idioma {\bf jeringoso}.\medskip
+	
+	Por ejemplo, {\it Elefante} es \az{\it Epelepenfapantepe}, {\it Tomate} es \az{\it Topomapatepe} y {\it Digital} es \az{\it Dipigipitapal}.\pause\bigskip
+	
+	Sea la siguiente especificaci\'on:\medskip
+	
+	\fcolorbox{black}{gray97}{\begin{minipage}{.95\textwidth}\footnotesize
+			Traduce un texto sin tildes de espa\~nol a jeringoso.\\
+			\az{Encabezado}: {\tt traducir\_a\_jeringoso(texto:str) $\rightarrow$ str}\\
+			\az{Requiere}: {\tt texto} es una oraci\'on en espa\~nol sin tildes.\\
+			\az{Devuelve}: la traducci\'on de {\tt texto} a jeringoso.
+	\end{minipage}}\bigskip
+	
+	
+	\begin{enumerate}[label=(\alph*)]
+		\item Dada la implementaci\'on de la siguiente pagina, proponer un invariante.
+		
+		\item Dado el invariante, demostrar que la implementaci\'on es correcta respecto de su especificaci\'on.
+		
+		\item (para hacer en casa) Descargar el archivo \rj{\tt traductor\_jeringoso\_testing.py} y correr los tests sobre la implementaci\'on propuesta. En caso de encontrarse errores, corregir los test hasta que pasen todos.
+	\end{enumerate}
+	
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Ejercicio 2}
+
+\begin{columns} 
+	
+	\begin{column}{.68\textwidth}
+		\begin{lstlisting}[style=python]
+def traducir_a_jeringoso(texto:str) -> int:
+  '''
+  Requiere: texto es en espaniol y sin tildes
+  Devuelve: la traduccion de texto a jeringoso
+  '''
+  res:str = ''
+  i:int = 0
+  #A
+  while i < len(texto):
+    #B
+    letra_actual:str = texto[i]
+    res = res + letra_actual
+    if es_vocal(letra_actual):
+      res =res+'p'+letra_actual.lower()
+    i = i + 1
+    #C
+  #D
+  return res
+		\end{lstlisting}
+	\end{column}
+	\pause 
+	\begin{column}{.28\textwidth}
+		
+		\begin{center}
+			\medskip
+			\vrd{\tt Invariante}\\
+			\bigskip
+			0 $\leq$ \textbf{i} $\leq$ len(texto) \\
+			\medskip
+			\textbf{res} tiene la traducci\'on a jeringoso de texto hasta la pos \textbf{i} (sin incluir)
+		\end{center}		
+	\end{column}%
+\end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}\frametitle{Recapitulando}
+
+Cosas importantes:\bigskip
+
+\begin{enumerate}
+
+\item Tener en cuenta que con cada funci\'on que tenga ciclo hay que demostrar dos cosas: finalizaci\'on y correctitud.
+
+
+\item Hacer una demostraci\'on no es contar l\'inea a l\'inea el algoritmo y tampoco son necesarios los ejemplos!
+
+
+\end{enumerate}
+
+\end{frame}
+
+
+\end{document}
